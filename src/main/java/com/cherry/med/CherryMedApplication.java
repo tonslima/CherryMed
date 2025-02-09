@@ -1,4 +1,4 @@
-package br.com.cherrymed.cherrymed;
+package com.cherry.med;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
