@@ -17,7 +17,6 @@ public record DoctorCreateDTO(
         String email,
 
         @NotBlank
-        @Pattern(regexp = "\\d{20}")
         String phone,
 
         @NotBlank

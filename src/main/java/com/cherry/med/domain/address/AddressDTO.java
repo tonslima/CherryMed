@@ -1,5 +1,6 @@
 package com.cherry.med.domain.address;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ public record AddressDTO(
         String uf,
 
         @NotBlank
+        @JsonAlias("postal_code")
         String postalCode,
 
         @NotBlank
