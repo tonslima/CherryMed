@@ -1,4 +1,4 @@
-package br.com.cherrymed.cherrymed;
+package com.cherry.med;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
