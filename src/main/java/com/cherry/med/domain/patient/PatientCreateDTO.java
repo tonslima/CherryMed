@@ -19,7 +19,7 @@ public record PatientCreateDTO(
         String phone,
 
         @NotBlank
-        @Pattern(regexp = "//{11}")
+        @Pattern(regexp = "\\d{11}")
         String cpf,
 
         @NotNull
