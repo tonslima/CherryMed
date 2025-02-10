@@ -28,9 +28,10 @@ public class Doctor {
     private Specialty specialty;
 
     @Embedded
-    Address address;
+    private Address address;
     private Boolean active;
 
+    // create constructor
     public Doctor(String name, String email, String phone, String crm, Specialty specialty, Address address) {
         this.name = name;
         this.email = email;
@@ -41,6 +42,7 @@ public class Doctor {
         this.active = true;
     }
 
+    // update constructor
     public Doctor(String name, String phone, Address address) {
         this.name = name;
         this.phone = phone;
