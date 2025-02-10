@@ -13,7 +13,6 @@ public class DoctorService {
 
     public Doctor create(Doctor doctor) {
         return repository.save(doctor);
-
     }
 
     public Doctor detail(Long id) {

@@ -12,4 +12,8 @@ public class PatientService {
     public Patient create(Patient patient) {
         return repository.save(patient);
     }
+
+    public Patient detail(Long id) {
+        return repository.findById(id).get();
+    }
 }

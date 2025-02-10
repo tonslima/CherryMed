@@ -31,6 +31,11 @@ public class PatientController {
         return ResponseEntity.created(uri).body(new PatientDetailedDTO(patient));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PatientDetailedDTO> detail(@PathVariable Long id) {
+        var patient = service.detail(id);
 
+        return ResponseEntity.ok().body(new PatientDetailedDTO(patient));
+    }
 
 }
