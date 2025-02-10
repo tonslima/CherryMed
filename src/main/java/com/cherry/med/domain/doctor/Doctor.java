@@ -1,6 +1,7 @@
 package com.cherry.med.domain.doctor;
 
 import com.cherry.med.domain.address.Address;
+import com.cherry.med.domain.address.AddressDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,5 +39,28 @@ public class Doctor {
         this.specialty = specialty;
         this.address = address;
         this.active = true;
+    }
+
+    public Doctor(String name, String phone, Address address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public Doctor update(Doctor update) {
+        if (update.name != null) {
+            this.name = update.name;
+        }
+        if (update.phone != null) {
+            this.phone = update.phone;
+        }
+        if (update.address != null) {
+            this.address.update(update.address);
+        }
+        return this;
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }

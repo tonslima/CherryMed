@@ -30,4 +30,31 @@ public class Address {
         this.postalCode = dto.postalCode();
         this.country = dto.country();
     }
+
+    public void update(Address update) {
+        if (update.street != null) {
+            this.street = update.street;
+        }
+        if (update.number != null) {
+            this.number = update.number;
+        }
+        if (update.complement != null) {
+            this.complement = update.complement;
+        }
+        if (update.neighborhood != null) {
+            this.neighborhood = update.neighborhood;
+        }
+        if (update.city != null) {
+            this.city = update.city;
+        }
+        if (update.uf != null) {
+            this.uf = update.uf;
+        }
+        if (update.postalCode != null) {
+            this.postalCode = update.postalCode;
+        }
+        if (update.country != null) {
+            this.country = update.country;
+        }
+    }
 }
