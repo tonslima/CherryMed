@@ -2,12 +2,12 @@ package com.cherry.med.controller;
 
 import com.cherry.med.domain.doctor.DoctorCreateDTO;
 import com.cherry.med.domain.doctor.DoctorDetailedDTO;
-import com.cherry.med.domain.patient.Patient;
-import com.cherry.med.domain.patient.PatientCreateDTO;
-import com.cherry.med.domain.patient.PatientDetailedDTO;
-import com.cherry.med.domain.patient.PatientService;
+import com.cherry.med.domain.patient.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +36,22 @@ public class PatientController {
         var patient = service.detail(id);
 
         return ResponseEntity.ok().body(new PatientDetailedDTO(patient));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<PatientListDTO>> list(@PageableDefault(page = 10, sort = "name") Pageable pageable) {
+        var page = service.list(pageable).map(PatientListDTO::new);
+
+        return ResponseEntity.ok(page);
+    }
+
+    @PatchMapping("/{id}/update")
+    @Transactional
+    public ResponseEntity<PatientDetailedDTO> update(@PathVariable Long id, @RequestBody PatientUpdateDTO dto) {
+        var update = PatientUpdateDTO.toEntity(dto);
+        var patient = service.update(id, update);
+
+        return ResponseEntity.ok(new PatientDetailedDTO(patient));
     }
 
 }

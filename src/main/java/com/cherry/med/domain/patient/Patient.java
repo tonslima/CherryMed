@@ -37,4 +37,24 @@ public class Patient {
         this.active = true;
     }
 
+    // update constructor
+    public Patient(String name, String phone, Address address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+
+    public Patient update(Patient update) {
+        if (update.name != null) {
+            this.name = update.name;
+        }
+        if (update.phone != null) {
+            this.phone = update.phone;
+        }
+        if (update.address != null) {
+            this.address.update(update.address);
+        }
+        return this;
+    }
 }
