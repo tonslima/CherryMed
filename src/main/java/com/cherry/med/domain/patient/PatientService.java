@@ -28,4 +28,8 @@ public class PatientService {
 
         return patient.update(update);
     }
+
+    public void delete(Long id) {
+        repository.findById(id).get().delete();
+    }
 }

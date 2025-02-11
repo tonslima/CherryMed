@@ -57,4 +57,8 @@ public class Patient {
         }
         return this;
     }
+
+    public void delete() {
+        this.active = false;
+    }
 }
