@@ -1,7 +1,6 @@
 package com.cherry.med.domain.doctor;
 
 import com.cherry.med.domain.address.Address;
-import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 
 public record DoctorDetailedDTO(
 

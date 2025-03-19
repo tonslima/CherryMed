@@ -4,7 +4,6 @@ import com.cherry.med.domain.address.AddressDTO;
 
 public record DoctorUpdateDTO(
 
-        Long id,
         String name,
         String phone,
         AddressDTO address

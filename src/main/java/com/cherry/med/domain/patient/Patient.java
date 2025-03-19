@@ -44,7 +44,6 @@ public class Patient {
         this.address = address;
     }
 
-
     public Patient update(Patient update) {
         if (update.name != null) {
             this.name = update.name;

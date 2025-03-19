@@ -1,7 +1,6 @@
 package com.cherry.med.domain.patient;
 
 import com.cherry.med.domain.address.Address;
-import com.cherry.med.domain.address.AddressDTO;
 
 public record PatientDetailedDTO(
 
@@ -17,5 +16,4 @@ public record PatientDetailedDTO(
         this(patient.getId(), patient.getName(), patient.getEmail(), patient.getPhone(),
                 patient.getCpf(), patient.getAddress());
     }
-
 }

@@ -1,5 +1,6 @@
-package com.cherry.med.domain.patient;
+package com.cherry.med.repository;
 
+import com.cherry.med.domain.patient.Patient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

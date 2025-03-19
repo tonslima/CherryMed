@@ -1,7 +1,6 @@
 package com.cherry.med.domain.doctor;
 
 import com.cherry.med.domain.address.Address;
-import com.cherry.med.domain.address.AddressDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

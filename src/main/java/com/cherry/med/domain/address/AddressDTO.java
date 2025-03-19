@@ -2,7 +2,6 @@ package com.cherry.med.domain.address;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record AddressDTO(
 
@@ -31,5 +30,8 @@ public record AddressDTO(
         public static Address toEntity(AddressDTO dto) {
                 return new Address(dto.street, dto.number, dto.complement,
                         dto.neighborhood, dto.city, dto.uf, dto.postalCode, dto.country);
+        }
+        public static Address toEntityUpdate(AddressDTO dto) {
+                return new Address(dto);
         }
 }

@@ -1,5 +1,7 @@
-package com.cherry.med.domain.doctor;
+package com.cherry.med.service;
 
+import com.cherry.med.domain.doctor.Doctor;
+import com.cherry.med.repository.DoctorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
