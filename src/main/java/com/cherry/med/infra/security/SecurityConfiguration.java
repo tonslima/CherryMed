@@ -38,13 +38,15 @@ public class SecurityConfiguration {
 
                     // Grants DOCTOR access
                     authorize.requestMatchers(HttpMethod.POST, "/doctors").hasRole("DOCTOR");
-                    authorize.requestMatchers(HttpMethod.GET, "/doctors/{id}").hasRole("DOCTOR");
+                    authorize.requestMatchers(HttpMethod.GET, "/doctors/{id}").hasAnyRole("DOCTOR", "PATIENT");
+                    authorize.requestMatchers(HttpMethod.GET, "/doctors").hasAnyRole("DOCTOR", "PATIENT");
                     authorize.requestMatchers(HttpMethod.PATCH, "/doctors/**").hasRole("DOCTOR");
                     authorize.requestMatchers(HttpMethod.DELETE, "/doctors/{id}").hasRole("DOCTOR");
 
                     // Grants PATIENT access
                     authorize.requestMatchers(HttpMethod.POST, "/patients").hasRole("PATIENT");
-                    authorize.requestMatchers(HttpMethod.GET, "/patients/*").hasRole("PATIENT");
+                    authorize.requestMatchers(HttpMethod.GET, "/patients/*").hasAnyRole("PATIENT", "DOCTOR");
+                    authorize.requestMatchers(HttpMethod.GET, "/patients").hasAnyRole("PATIENT", "DOCTOR");
                     authorize.requestMatchers(HttpMethod.PATCH, "/patients/**").hasRole("PATIENT");
                     authorize.requestMatchers(HttpMethod.DELETE, "/patients/*").hasRole("PATIENT");
 
