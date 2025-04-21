@@ -2,6 +2,7 @@ package com.cherry.med.service;
 
 import com.cherry.med.domain.user.User;
 import com.cherry.med.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.security.core.userdetails.UserDetails;

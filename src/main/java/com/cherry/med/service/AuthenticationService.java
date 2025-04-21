@@ -13,6 +13,7 @@ public class AuthenticationService {
     private final AuthenticationManager manager;
 
     public Authentication authenticate(String login, String password) {
+
         // Merges login and password creating a single "token"
         var usernamePassword = new UsernamePasswordAuthenticationToken(login, password);
         return manager.authenticate(usernamePassword); // Authenticate using "token"

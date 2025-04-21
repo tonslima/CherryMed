@@ -25,34 +25,41 @@ public class SecurityConfiguration {
     // RESTful configuration and authentication roles
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(AbstractHttpConfigurer::disable) // Disables CSRF protection for REST APIs
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless JWT authentication
+        return httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> {
 
                     // Public endpoints (No authentication required)
                     authorize.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/auth/register").permitAll();
 
-                    // Grants ADMIN access to all endpoints
-                    authorize.requestMatchers("/**").hasRole("ADMIN");
-
-                    // Grants DOCTOR access
+                    // Doctor endpoints access
                     authorize.requestMatchers(HttpMethod.POST, "/doctors").hasRole("DOCTOR");
                     authorize.requestMatchers(HttpMethod.GET, "/doctors/{id}").hasAnyRole("DOCTOR", "PATIENT");
                     authorize.requestMatchers(HttpMethod.GET, "/doctors").hasAnyRole("DOCTOR", "PATIENT");
                     authorize.requestMatchers(HttpMethod.PATCH, "/doctors/**").hasRole("DOCTOR");
                     authorize.requestMatchers(HttpMethod.DELETE, "/doctors/{id}").hasRole("DOCTOR");
 
-                    // Grants PATIENT access
+                    // Patient endpoints access
                     authorize.requestMatchers(HttpMethod.POST, "/patients").hasRole("PATIENT");
                     authorize.requestMatchers(HttpMethod.GET, "/patients/*").hasAnyRole("PATIENT", "DOCTOR");
                     authorize.requestMatchers(HttpMethod.GET, "/patients").hasAnyRole("PATIENT", "DOCTOR");
                     authorize.requestMatchers(HttpMethod.PATCH, "/patients/**").hasRole("PATIENT");
                     authorize.requestMatchers(HttpMethod.DELETE, "/patients/*").hasRole("PATIENT");
 
+                    // Appointment endpoints access
+                    authorize.requestMatchers(HttpMethod.POST, "/appointment").hasAnyRole("PATIENT", "DOCTOR");
+                    authorize.requestMatchers(HttpMethod.DELETE, "/appointment").hasAnyRole("PATIENT", "DOCTOR");
+
+                    // Grants ADMIN access to all endpoints (placed AFTER the specific rules)
+                    authorize.requestMatchers("/**").hasRole("ADMIN");
+
                     // All other requests require authentication
                     authorize.anyRequest().authenticated();
-                }).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
+                })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     // Makes Spring know AuthenticationManager

@@ -22,10 +22,11 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("cherrymed-api")        // Insert token issuer (emissor) into the token
-                    .withSubject(user.getLogin())       // Insert user login into the token
-                    .withExpiresAt(genExpireDate())     // Set token expiry date
-                    .sign(algorithm);                   // sign token using the initial algorithm
+                    .withIssuer("cherrymed-api")                           // Insert token issuer (emissor) into the token
+                    .withSubject(user.getLogin())                         // Insert user login into the token
+                    .withClaim("role", user.getRole().name())      // Insert user id into the token
+                    .withExpiresAt(genExpireDate())                     // Set token expiry date
+                    .sign(algorithm);                                  // sign token using the initial algorithm
             return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Error while generate token", exception);
