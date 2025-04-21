@@ -49,8 +49,8 @@ public class SecurityConfiguration {
                     authorize.requestMatchers(HttpMethod.DELETE, "/patients/*").hasRole("PATIENT");
 
                     // Appointment endpoints access
-                    authorize.requestMatchers(HttpMethod.POST, "/appointment").hasAnyRole("PATIENT", "DOCTOR");
-                    authorize.requestMatchers(HttpMethod.DELETE, "/appointment").hasAnyRole("PATIENT", "DOCTOR");
+                    authorize.requestMatchers(HttpMethod.POST, "/appointments").hasAnyRole("PATIENT", "DOCTOR", "ADMIN");
+                    authorize.requestMatchers(HttpMethod.DELETE, "/appointments").hasAnyRole("PATIENT", "DOCTOR", "ADMIN");
 
                     // Grants ADMIN access to all endpoints (placed AFTER the specific rules)
                     authorize.requestMatchers("/**").hasRole("ADMIN");

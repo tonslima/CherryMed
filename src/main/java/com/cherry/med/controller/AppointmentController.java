@@ -1,7 +1,6 @@
 package com.cherry.med.controller;
 
 import com.cherry.med.domain.appointment.AppointmentDTO;
-import com.cherry.med.domain.appointment.AppointmentDetailedDTO;
 import com.cherry.med.domain.appointment.CancelAppointmentDTO;
 import com.cherry.med.service.AppointmentService;
 import jakarta.transaction.Transactional;
@@ -20,8 +19,7 @@ public class AppointmentController {
     @PostMapping
     @Transactional
     public ResponseEntity<AppointmentDTO> schedule(@RequestBody @Valid AppointmentDTO dto) {
-        System.out.println("Chegou porra");
-        var appointment = appointmentService.bookAppointment(dto.idDoctor(), dto.idPatient(), dto.dateTime(), dto.specialty());
+        var appointment = appointmentService.bookAppointment(dto.doctorId(), dto.patientId(), dto.dateTime(), dto.specialty());
 
         return ResponseEntity.ok(AppointmentDTO.fromEntity(appointment));
     }

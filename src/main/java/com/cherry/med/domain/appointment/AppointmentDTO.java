@@ -1,6 +1,7 @@
 package com.cherry.med.domain.appointment;
 
 import com.cherry.med.domain.doctor.Specialty;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,14 +12,15 @@ public record AppointmentDTO(
 
         Long id,
 
-        Long idDoctor,
+        Long doctorId,
 
         @NotNull
-        Long idPatient,
+        Long patientId,
 
         @NotNull
         @Future
         @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
+        @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
         LocalDateTime dateTime,
 
         Specialty specialty
