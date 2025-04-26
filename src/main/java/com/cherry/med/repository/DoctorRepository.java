@@ -18,7 +18,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     @Query("""
             select d from Doctor d
             where
-            active = true
+            d.active = true
             and
             d.specialty = :specialty
             and
