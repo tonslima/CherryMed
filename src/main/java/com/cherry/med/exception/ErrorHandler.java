@@ -1,5 +1,6 @@
 package com.cherry.med.exception;
 
+import jakarta.validation.ValidationException;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -81,6 +82,19 @@ public class ErrorHandler {
         errorResponse.put("error", "Bad Request");
         errorResponse.put("details", message);
 
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity handleAppointmentValidations(ValidationException exception) {
+        String message = NestedExceptionUtils.getMostSpecificCause(exception).getMessage();
+
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", "Validation error");
+        errorResponse.put("details", message);
+
+        System.out.println("Oiee");
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
