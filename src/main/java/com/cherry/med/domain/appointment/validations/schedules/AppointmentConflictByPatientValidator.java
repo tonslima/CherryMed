@@ -1,7 +1,7 @@
 package com.cherry.med.domain.appointment.validations.schedules;
 
 import com.cherry.med.repository.AppointmentRepository;
-import com.cherry.med.repository.PatientRepository;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,8 @@ public class AppointmentConflictByPatientValidator implements AppointmentValidat
         var firstHour = dateTime.withHour(7);
         var lastHour = dateTime.withHour(18);
 
-        if (appointmentRepository.findByPatientIdAndDateTimeBetween(patientId, firstHour, lastHour)) {
-            throw new RuntimeException("Patient already has an appointment on this date");
+        if (appointmentRepository.existsByPatientIdAndDateTime(patientId, dateTime)) {
+            throw new ValidationException("Patient already has an appointment on this date");
         }
     }
 }

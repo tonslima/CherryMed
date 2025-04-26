@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    boolean findByDoctorIdAndDateTime(Long doctorId, LocalDateTime dateTime);
+    // Retorna se já existe um agendamento exato
+    boolean existsByPatientIdAndDateTime(Long patientId, LocalDateTime dateTime);
 
-    boolean findByPatientIdAndDateTimeBetween(Long patientId, LocalDateTime firstHour, LocalDateTime lastHour);
+    boolean existsByDoctorIdAndDateTime(Long doctorId, LocalDateTime dateTime);
 }

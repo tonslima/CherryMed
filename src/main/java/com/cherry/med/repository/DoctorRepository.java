@@ -27,7 +27,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
                 where
                 a.dateTime = :dateTime
             )
-            order by function('rand')
+            order by random()
             limit 1
             """)
     Doctor findRandomAvailableBySpecialty(Specialty specialty, LocalDateTime dateTime);

@@ -1,6 +1,7 @@
 package com.cherry.med.domain.appointment.validations.schedules;
 
 import com.cherry.med.repository.DoctorRepository;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class ActiveDoctorValidator implements AppointmentValidator {
         }
 
         if (!doctorRepository.findActiveById(doctorId)) {
-            throw new RuntimeException("Doctor is not active");
+            throw new ValidationException("Doctor is not active");
         }
     }
 }

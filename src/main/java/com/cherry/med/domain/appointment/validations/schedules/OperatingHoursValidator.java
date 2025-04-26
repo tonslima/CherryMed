@@ -12,7 +12,7 @@ public class OperatingHoursValidator implements AppointmentValidator {
     public void validate(Long patientId, Long doctorId, LocalDateTime dateTime) {
         boolean sunday = dateTime.getDayOfWeek().equals(DayOfWeek.SUNDAY);
         boolean beforeOpening = dateTime.getHour() < 7;
-        boolean afterClosing = dateTime.getHour() > 19;
+        boolean afterClosing = dateTime.getHour() >= 19;
 
         if(sunday || beforeOpening || afterClosing) {
             throw new ValidationException("Out of clinic operating hours");

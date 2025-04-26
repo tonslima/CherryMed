@@ -16,7 +16,7 @@ public class AppointmentConflictByDoctorValidator implements AppointmentValidato
     @Override
     public void validate(Long patientId, Long doctorId, LocalDateTime dateTime) {
 
-        if (appointmentRepository.findByDoctorIdAndDateTime(doctorId, dateTime)) {
+        if (appointmentRepository.existsByDoctorIdAndDateTime(doctorId, dateTime)) {
             throw new ValidationException("Doctor already has an appointment on this date");
         }
     }
