@@ -2,6 +2,7 @@ package com.cherry.med.controller;
 
 import com.cherry.med.domain.doctor.*;
 import com.cherry.med.service.DoctorService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/doctors")
+@SecurityRequirement(name = "bearer-key")
 public class DoctorController {
 
     private final DoctorService service;

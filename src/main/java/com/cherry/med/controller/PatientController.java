@@ -5,6 +5,7 @@ import com.cherry.med.domain.patient.PatientDetailedDTO;
 import com.cherry.med.domain.patient.PatientListDTO;
 import com.cherry.med.domain.patient.PatientUpdateDTO;
 import com.cherry.med.service.PatientService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/patients")
+@SecurityRequirement(name = "bearer-key")
 public class PatientController {
 
     private final PatientService service;

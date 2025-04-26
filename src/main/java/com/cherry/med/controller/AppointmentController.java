@@ -3,6 +3,7 @@ package com.cherry.med.controller;
 import com.cherry.med.domain.appointment.AppointmentDTO;
 import com.cherry.med.domain.appointment.CancelAppointmentDTO;
 import com.cherry.med.service.AppointmentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/appointments")
+@SecurityRequirement(name = "bearer-key")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
