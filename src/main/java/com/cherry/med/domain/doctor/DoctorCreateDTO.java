@@ -1,7 +1,6 @@
 package com.cherry.med.domain.doctor;
 
 import com.cherry.med.domain.address.AddressDTO;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,13 +25,12 @@ public record DoctorCreateDTO(
         @NotNull
         Specialty specialty,
 
-        @NotNull
-        @Valid
-        AddressDTO address
+        @NotBlank
+        AddressDTO addressDTO
 
 ) {
         public static Doctor toEntity(DoctorCreateDTO dto) {
                 return new Doctor(dto.name, dto.email, dto.phone, dto.crm,
-                        dto.specialty, AddressDTO.toEntity(dto.address));
+                        dto.specialty, AddressDTO.toEntity(dto.addressDTO));
         }
 }

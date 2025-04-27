@@ -27,15 +27,8 @@ public class ErrorHandler {
         return ResponseEntity.notFound().build();
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<List<ValidationError>> error400Handler(MethodArgumentNotValidException exception) {
-//        var errors = exception.getFieldErrors();
-//
-//        return ResponseEntity.badRequest().body(errors.stream().map(ValidationError::new).toList());
-//    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException exception) {
         Map<String, Object> errorResponse = new HashMap<>();
 
@@ -53,14 +46,6 @@ public class ErrorHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<ErrorMessage> error400Handler2(DataIntegrityViolationException exception) {
-//        String message = NestedExceptionUtils.getMostSpecificCause(exception).getMessage();
-//        ErrorMessage errorMessage = new ErrorMessage(message);
-//
-//        return ResponseEntity.badRequest().body(errorMessage);
-//    }
-
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Map<String, String>> handleDataIntegrityViolation(DataIntegrityViolationException exception) {
@@ -75,7 +60,8 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(HttpClientErrorException.BadRequest.class)
-    public ResponseEntity handleLoginAlreadyExists(HttpClientErrorException.BadRequest exception) {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Map<String, String>> handleLoginAlreadyExists(HttpClientErrorException.BadRequest exception) {
         String message = NestedExceptionUtils.getMostSpecificCause(exception).getMessage();
 
         Map<String, String> errorResponse = new HashMap<>();
@@ -87,14 +73,13 @@ public class ErrorHandler {
 
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity handleAppointmentValidations(ValidationException exception) {
+    public ResponseEntity<Map<String, String>> handleAppointmentValidations(ValidationException exception) {
         String message = NestedExceptionUtils.getMostSpecificCause(exception).getMessage();
 
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", "Validation error");
         errorResponse.put("details", message);
 
-        System.out.println("Oiee");
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
